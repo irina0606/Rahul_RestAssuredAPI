@@ -1,5 +1,6 @@
 package tests;
 
+
 import files.ReUsableMethods;
 import files.payload;
 import io.restassured.RestAssured;
@@ -25,15 +26,13 @@ public class DynamicJson {
         JsonPath json = ReUsableMethods.rawToJson(addResponse);
         String id = json.get("ID");
         String msg = json.get("Msg");
-        System.out.println(msg);
-        System.out.println(id);
-
+        System.out.println(id + " " + msg);
 
     }
 
     @DataProvider(name="BooksData")
     public Object[][] addData(){
-        return new Object[][]{{"test", "11"}, {"test", "22"}, {"test", "33"}};
+        return new Object[][]{{"t", "11"}, {"t", "22"}, {"t", "33"}};
     }
 
     // delete to avoid the error
@@ -46,15 +45,15 @@ public class DynamicJson {
                 .when().delete("Library/DeleteBook.php")
                 .then().assertThat().statusCode(200)
                 .extract().response().asString();
-       JsonPath json = ReUsableMethods.rawToJson(deleteResponse);
+        JsonPath json = ReUsableMethods.rawToJson(deleteResponse);
         String msg1 = json.get("msg");
         System.out.println(msg1);
-        System.out.println(deleteResponse);
+
     }
 
         @DataProvider(name="BooksData1")
     public Object[][] deleteData(){
-        return new Object[][]{{"ol11"}, {"ka22"}, {"Pe33"}};
+        return new Object[][]{{"t11"}, {"t22"}, {"t33"}};
     }
 
 

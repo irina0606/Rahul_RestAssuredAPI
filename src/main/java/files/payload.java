@@ -64,7 +64,7 @@ public class payload {
     public static String DeleteBook(String ID) {
         return "{\n" +
                 "\n" +
-                "\"ID\":\""+ ID + "\",\n" +
+                "\"ID\":\""+ ID + "\"\n" +
                 "}\n";
     }
 

@@ -1,72 +1,48 @@
 package tests;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.responseSpecification;
 
 
 import java.io.IOException;
-
 import java.nio.file.Files;
 
 import java.nio.file.Paths;
 
 
-import files.ReUsableMethods;
-import org.testng.annotations.Test;
-
-
 import io.restassured.RestAssured;
 
 import io.restassured.path.json.JsonPath;
-
-import io.restassured.response.Response;
-
+import org.testng.annotations.Test;
 
 
 public class StaticJson {
+@Test
+    public void addBook() throws IOException {
 
-    @Test
+        RestAssured.baseURI = "https://rahulshettyacademy.com";
 
-    public void addBook() throws IOException
+        String resp = given()
+                .queryParam("key", "qaclick123")
 
-    {
+                .header("Content-Type","application/json")
 
-        RestAssured.baseURI="https://rahulshettyacademy.com";
+                .body(GenerateStringFromResource("C:\\Users\\iryna.kalynychenko\\Documents\\Learning\\RestAssured Udemy\\location.json"))
+                .when().post("/maps/api/place/add/json")
 
-        Response resp=given().
+                .then().assertThat().statusCode(200)//.body("scope", equalTo("APP")).header("server", "Apache/2.4.41 (Ubuntu)")
 
-                header("Content-Type","application/json").
+                .extract().response().asString();
 
-                body(GenerateStringFromResource("C:\\Users\\iryna.kalynychenko\\Documents\\Learning\\Rest Assured - Udemy")).
-
-                when().
-
-                post("/Library/Addbook.php").
-
-                then().assertThat().statusCode(200).
-
-                extract().response();
-
-        JsonPath json = ReUsableMethods.rawToJson(String.valueOf(resp));
-
-        String id=json.get("ID");
-
-        System.out.println(id);
-
-
-
-        //deleteBOok
+        System.out.println(resp);
+        JsonPath json = new JsonPath(resp);
+        String placeId = json.getString("place_id");
+        System.out.println(placeId);
 
     }
 
     public static String GenerateStringFromResource(String path) throws IOException {
 
-
-
         return new String(Files.readAllBytes(Paths.get(path)));
-
-
-
     }
 
 }
