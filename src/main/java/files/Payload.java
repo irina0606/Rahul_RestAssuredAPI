@@ -1,8 +1,6 @@
 package files;
 
-import java.lang.reflect.Array;
-
-public class payload {
+public class Payload {
 
     public static String AddPlace() {
 

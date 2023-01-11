@@ -2,14 +2,11 @@ package tests;
 
 
 import files.ReUsableMethods;
-import files.payload;
+import files.Payload;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 import static io.restassured.RestAssured.given;
 
@@ -19,7 +16,7 @@ public class DynamicJson {
     public void addBook(String isbn, String aisle){
         RestAssured.baseURI = "https://rahulshettyacademy.com";
         String addResponse = given().header("Content-Type", "application/json")
-                .body(payload.AddBook(isbn, aisle))
+                .body(Payload.AddBook(isbn, aisle))
                 .when().post("Library/Addbook.php")
                 .then().assertThat().statusCode(200)
                 .extract().response().asString();
@@ -41,7 +38,7 @@ public class DynamicJson {
     public void deleteBook(String ID) {
         RestAssured.baseURI = "https://rahulshettyacademy.com";
         String deleteResponse = given().header("Content-Type", "application/json")
-                .body(payload.DeleteBook(ID))
+                .body(Payload.DeleteBook(ID))
                 .when().delete("Library/DeleteBook.php")
                 .then().assertThat().statusCode(200)
                 .extract().response().asString();

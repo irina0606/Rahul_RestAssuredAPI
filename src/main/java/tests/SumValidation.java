@@ -1,6 +1,6 @@
 package tests;
 
-import files.payload;
+import files.Payload;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,7 +10,7 @@ public class SumValidation {
     @Test
     public void totalPriceAllCourses(){
 
-        JsonPath json = new JsonPath(payload.CoursePrice());
+        JsonPath json = new JsonPath(Payload.CoursePrice());
         int countCourses = json.getInt("courses.size()");
         int priceForAllCourses = 0;
         int purchaseAmount = json.getInt("dashboard.purchaseAmount");

@@ -1,6 +1,6 @@
 package tests;
 
-import files.payload;
+import files.Payload;
 import files.ReUsableMethods;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
@@ -18,7 +18,7 @@ public class Basics {
         String postResponse = given().log().all()
                 .queryParam("key", "qaclick123")
                 .header("Content-Type", "application/json")
-                .body(payload.AddPlace())
+                .body(Payload.AddPlace())
         .when().post("/maps/api/place/add/json")
         .then().log().all()
         .assertThat().statusCode(200).body("scope", equalTo("APP")).header("server", "Apache/2.4.41 (Ubuntu)")

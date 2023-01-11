@@ -1,14 +1,14 @@
 package tests;
 
-import files.payload;
+import files.Payload;
 import io.restassured.path.json.JsonPath;
 
 public class ComplexJsonParse {
 
     public static void main(String[] args) {
 
-        JsonPath json  = new JsonPath(payload.CoursePrice());
-        System.out.println(payload.CoursePrice());
+        JsonPath json  = new JsonPath(Payload.CoursePrice());
+        System.out.println(Payload.CoursePrice());
 
 // Print No of courses
         System.out.println(">>>>>>>>> Print No of courses: ");
